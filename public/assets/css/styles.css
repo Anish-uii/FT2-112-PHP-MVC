@@ -1,0 +1,95 @@
+/* Resetting default padding, margin, and box-sizing for all elements */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  /* Styling for the main container */
+  .container {
+    max-width: 580px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+  }
+  .name-form a {
+    font-size: 18px;
+    color: #0044ff;
+    text-decoration: none;
+    margin: 10px 6px;
+  }
+  /* Styling for the form */
+  .name-form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Styling for form labels */
+  .name-form label {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  /* Styling for text input fields */
+  .name-form input[type="text"],
+  .name-form input[type="password"],
+  .name-form input[type= "email"] {
+    width: calc(90% - 20px); /* Setting width with a margin */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #fname,#lname{
+    width: 45%;
+  }
+  /* Styling for submit button */
+  .name-form input[type="submit"] {
+    width: 200px;
+    margin: 20px auto;
+    padding: 14px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #4caf50;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  /* Hover effect for submit button */
+  .name-form input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  /* Styling for error messages */
+  .name-form .signup-link {
+    margin: 20px 5px;
+    font-size: 18px;
+  }
+  .name-form .google-btn{
+    padding: 0 20px;
+    display: flex;
+    margin: 10px auto;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #AAA;
+    border-radius: 8px;
+    font-size: 20px;
+  }
+  .name-form #google-img {
+    width: 40px;
+    margin: 10px 20px;
+  }
+  
+  .name-form .signup-link a{
+    text-decoration: none;
+    color: #004b8b;
+  }
+  .hide-btn:hover {
+    cursor: pointer;
+  }
