@@ -1,3 +1,46 @@
+
+$(document).ready(function () {
+    displayPosts(0);
+    $('#load-more-btn').on('click', function () {
+        var displayedPosts = $('.wall .post').length;
+        displayPosts(displayedPosts);
+    });
+
+    $('.wall').on('click', '[id^="like-btn"]', function (event) {
+        event.preventDefault();
+        var postId = $(this).attr('id').replace('like-btn', '');
+        var likebtn = $("#likebtn" + postId);
+        likebtn.toggleClass('fa-regular fa-solid');
+        updateLikes(postId, username);
+    });
+
+    $('.wall').on('click', '[id^="comment-btn"]', function (event) {
+        event.preventDefault();
+        var postId = $(this).attr('id').replace('comment-btn', '');
+        var commentContainer = $(".comment-container" + postId);
+        var commentbtn = $("#commentbtn" + postId);
+
+        if (commentContainer.css('display') == 'none') {
+            displayComments(postId);
+            commentbtn.removeClass("fa-regular").addClass("fa-solid");
+        } else {
+            $(".allcomments").children().remove();
+            commentbtn.removeClass("fa-solid").addClass("fa-regular");
+        }
+        commentContainer.toggle();
+    });
+
+    $('.wall').on('click', '.submit-comment-btn', function (event) {
+        event.preventDefault();
+        var postId = $(this).data('post-id');
+        var commentText = $('#comment' + postId).val();
+        if (commentText === "") {
+            alert("Comment cannot be empty");
+            return;
+        }
+        submitComment(postId, commentText, username);
+    });
+});
 function displayPosts(displayedPosts) {
     $.ajax({
         url: '../app/core/load_more_posts.php',
