@@ -2,9 +2,7 @@
 $loadposts = new Welcome;
 $posts = $loadposts->getPosts();
 $totalPosts = count($posts);
-
 $userInfo = $loadposts->getUser($_SESSION['username']);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,18 +46,9 @@ $userInfo = $loadposts->getUser($_SESSION['username']);
         <main>
             <h1>See what's new around here..</h1>
             <section class="wall">
-                <?php
-
-                if ($totalPosts <= 10):
-                    $loadposts->displayPosts($posts);
-
-                elseif ($totalPosts > 10):
-                    $loadposts->displayPosts(array_slice($posts, 0, 10));
-                    ?>
-                    <section id="load-more-section">
-                        <button id="load-more-btn">Load More</button>
-                    </section>
-                <?php endif; ?>
+            </section>
+            <section id="load-more-section" style>
+                <button id="load-more-btn">Load More</button>
             </section>
         </main>
         <footer>
@@ -72,97 +61,49 @@ $userInfo = $loadposts->getUser($_SESSION['username']);
 <script>
 
     $(document).ready(function () {
+        var username = "<?php echo $_SESSION['username'] ?>";
+        displayPosts(0);
         $('#load-more-btn').on('click', function () {
             var displayedPosts = $('.wall .post').length;
             displayPosts(displayedPosts);
         });
 
-        $("[id^='like-btn']").on("click", function (event) {
+        $('.wall').on('click', '[id^="like-btn"]', function (event) {
             event.preventDefault();
             var postId = $(this).attr('id').replace('like-btn', '');
+            var likebtn = $("#likebtn" + postId);
+            likebtn.toggleClass('fa-regular fa-solid');
+            updateLikes(postId, username);
         });
-        $("[id^='comment-btn']").on("click", function (event) {
+
+        $('.wall').on('click', '[id^="comment-btn"]', function (event) {
             event.preventDefault();
             var postId = $(this).attr('id').replace('comment-btn', '');
-            $(".comment-container" + postId).toggle();
+            var commentContainer = $(".comment-container" + postId);
+            var commentbtn = $("#commentbtn" + postId);
+
+            if (commentContainer.css('display') == 'none') {
+                displayComments(postId);
+                commentbtn.removeClass("fa-regular").addClass("fa-solid");
+            } else {
+                $(".allcomments").children().remove();
+                commentbtn.removeClass("fa-solid").addClass("fa-regular");
+            }
+            commentContainer.toggle();
+        });
+
+        $('.wall').on('click', '.submit-comment-btn', function (event) {
+            event.preventDefault();
+            var postId = $(this).data('post-id');
+            var commentText = $('#comment' + postId).val();
+            if (commentText === "") {
+                alert("Comment cannot be empty");
+                return;
+            }
+            submitComment(postId, commentText, username);
         });
     });
-
-    function displayPosts(displayedPosts) {
-        var totalPosts = <?php echo $totalPosts; ?>;
-        var remainingPosts = totalPosts - displayedPosts;
-
-        if (remainingPosts > 0) {
-            $.ajax({
-                url: '../app/core/load_more_posts.php',
-                method: 'GET',  
-                data: { offset: displayedPosts },
-                success: function (response) {
-                    var posts = JSON.parse(response);
-                    if (posts.error) {
-                        console.error(posts.error);
-                        return;
-                    }
-                    posts.forEach(function (post) {   
-                        var postHTML = `
-                        <div class="post">
-                            <div class="post-header">
-                                <img src="${post.PROFILE_IMAGE}" alt="Profile Picture">
-                                <div class="post-info">
-                                    <h2>${post.USERNAME}</h2>
-                                    <p>${getTimeDifference(post.POST_DATE)}</p>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <img src="${post.IMAGE_PATH}" alt="" class="post-image">
-                                <p>${post.POST_DESCRIPTION}</p>
-                            </div>
-                            <div class="reactions">
-                                <a href="#" id="like-btn${post.POST_ID}"><span class="like"><i class="fa-regular fa-thumbs-up"></i></span></a>
-                                <a href="#" id="comment-btn${post.POST_ID}"><span class="comment"><i class="fa-regular fa-comment"></i></span></a>
-                                <div class="comment-container${post.POST_ID} commentbox">
-                                    <h1>this is my comment</h1>
-                                </div>
-                            </div>
-                        </div>`;
-                        $('.wall').append(postHTML);
-                    });
-
-                    if (remainingPosts <= 10) {
-                        $('#load-more-section').hide();
-                    } else {
-                        $('#load-more-section').appendTo('.wall');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        }
-    }
-    function getTimeDifference(postDate) {
-        var currentDate = new Date();
-        var postDateTime = new Date(postDate);
-
-        var timeDifference = Math.abs(currentDate - postDateTime);
-
-        var seconds = Math.floor(timeDifference / 1000);
-        var minutes = Math.floor(seconds / 60);
-        var hours = Math.floor(minutes / 60);
-        var days = Math.floor(hours / 24);
-        var months = Math.floor(days / 30);
-
-        if (months > 0) {
-            return "Posted " + months + " month" + (months > 1 ? "s" : "") + " ago";
-        } else if (days > 0) {
-            return "Posted " + days + " day" + (days > 1 ? "s" : "") + " ago";
-        } else if (hours > 0) {
-            return "Posted " + hours + " hour" + (hours > 1 ? "s" : "") + " ago";
-        } else if (minutes > 0) {
-            return "Posted " + minutes + " minute" + (minutes > 1 ? "s" : "") + " ago";
-        } else {
-            return "Posted " + seconds + " second" + (seconds > 1 ? "s" : "") + " ago";
-        }
-    }
 </script>
+<script src="<?php echo ROOT ?>/assets/js/script.js"></script>
+
 </html>

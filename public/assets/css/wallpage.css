@@ -102,9 +102,13 @@ main {
 }
 .wall .post .reactions a {
     font-size: 30px;
-    margin-right: 20px;
+    margin: 4px 10px;
 }
 .wall .post .reactions .commentbox{
+    display: none;
+    padding: 10px;
+}
+.wall .load-more-section{
     display: none;
 }
 .wall #load-more-btn{
@@ -120,6 +124,57 @@ main {
     cursor: pointer;
     background-color: #999;
 }
+
+.comment-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-form {
+    margin-bottom: 10px;
+}
+
+.new-comment {
+    display: flex;
+    align-items: center;
+}
+
+.new-comment input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    max-width: 260px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-comment-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+}
+
+.allcomments {
+    margin-top: 10px;
+}
+
+.comment {
+    margin-bottom: 5px;
+}
+
+.comment-username {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.comment-text {
+    word-break: break-all;
+}
+
 /* Footer Section */
 footer {
     background-color: #B5D5C5;

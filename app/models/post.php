@@ -53,43 +53,4 @@ trait Post
     {
         $query = "";
     }
-    function displayPosts($posts)
-    {
-
-        foreach ($posts as $post):
-            $singleUserInfo = $this->getUser($post["USERNAME"]);?>
-        
-            <div class="post">
-                <div class="post-header">
-                    <img src="<?php
-                    echo $singleUserInfo['PROFILE_IMAGE'] ?>" alt="Profile Picture">
-                    <div class="post-info">
-                        <h2>
-                            <?php echo $post['USERNAME']; ?>
-                        </h2>
-                        <p>
-                            <?php echo getTimeDifference($post['POST_DATE']); ?>
-                        </p>
-                    </div>
-                </div>
-                <div class="post-content">
-                    <img src="<?php echo $post['IMAGE_PATH']; ?>" alt="" class="post-image">
-                    <p>
-                        <?php echo $post['POST_DESCRIPTION']; ?>
-                    </p>
-                </div>
-                <div class="reactions">
-                    <a href='#' id="like-btn<?php echo $post['POST_ID'] ?>"><span class="like"><i class="fa-regular fa-thumbs-up"></i></span></a>
-                    <a href='#' id="comment-btn<?php echo $post['POST_ID'] ?>"><span class="comment"><i
-                                class="fa-regular fa-comment"></i></span></a>
-                    <div class="comment-container<?php echo $post['POST_ID'] ?> commentbox">
-                        <h1>this is my comment</h1>
-                    </div>
-                </div>
-            </div>
-
-            <?php
-            $_SESSION['lastpostid'] = $post['POST_ID'];
-        endforeach;
-    }
 }
