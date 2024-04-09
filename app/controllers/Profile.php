@@ -1,7 +1,10 @@
 <?php
-$model = new Model;
-$model->modelCall('post');
-$model->modelCall('user');
+namespace App\Controllers;
+
+use App\models\User;
+use App\models\Post;
+use App\core\Controller;
+
 class Profile
 {
     use User, Post, Controller;

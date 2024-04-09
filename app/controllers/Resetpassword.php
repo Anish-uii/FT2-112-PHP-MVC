@@ -1,4 +1,8 @@
 <?php
+namespace App\Controllers;
+
+use App\core\Controller;
+use App\core\Database;
 class Resetpassword
 {
     use Database, Controller;
@@ -28,12 +32,12 @@ class Resetpassword
                                 $update_password = $this->query("UPDATE USER_DATA SET password = '$password' WHERE EMAIL = '$email'");
 
                                 if (!$update_password) {
-                                    throw new Exception("There was some error please try again.");
+                                    throw new \Exception("There was some error please try again.");
                                 } else {
                                     $removeToken = $this->query("UPDATE USER_DATA SET TOKEN = NULL,TOKEN_TIME = NULL WHERE EMAIL = '$email'");
                                     echo "<script>window.location.href = '/'</script>";
                                 }
-                            } catch (Exception $e) {
+                            } catch (\Exception $e) {
                                 echo "" . $e->getMessage();
                             }
                         }

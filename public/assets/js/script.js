@@ -43,7 +43,7 @@ $(document).ready(function () {
 });
 function displayPosts(displayedPosts) {
     $.ajax({
-        url: '../app/core/load_more_posts.php',
+        url: '../app/models/load_more_posts.php',
         method: 'GET',
         data: { offset: displayedPosts },
         success: function (response) {
@@ -68,7 +68,7 @@ function displayPosts(displayedPosts) {
 
 function updateLikes(postId, username) {
     $.ajax({
-        url: '../app/core/updatelikes.php',
+        url: '../app/models/updatelikes.php',
         method: 'PUT',
         data: JSON.stringify({ postid: postId, username: username }),
         contentType: 'application/json',
@@ -78,7 +78,7 @@ function updateLikes(postId, username) {
                 console.error(res.error);
                 return;
             }
-            console.log("After AJAX Call");
+            $("#totallikes"+postId).find("#like-count").text(res);
         },
         error: function (xhr, status, error) {
             console.error(xhr.responseText);
@@ -103,7 +103,7 @@ function loadPosts(posts) {
                         </div>
                         <div class="reactions">
                             <a href="#" id="like-btn${post.POST_ID}"><span class="like"><i class="fa-regular fa-thumbs-up" id="likebtn${post.POST_ID}"></i></span></a>
-                            <span class="totallikes${post.POST_ID}"></span>
+                            <span id="totallikes${post.POST_ID}"><span id="like-count">${post.LIKES}</span> likes</span>
                             <a href="#" id="comment-btn${post.POST_ID}"><span class="comment"><i class="fa-regular fa-comment" id="commentbtn${post.POST_ID}"></i></span></a>
                             <div class="comment-container${post.POST_ID} commentbox">
                                 <form action="" class="comment-form">
@@ -125,7 +125,7 @@ function loadPosts(posts) {
 
 function submitComment(postId, commentText, username) {
     $.ajax({
-        url: '../app/core/add_comments.php',
+        url: '../app/models/add_comments.php',
         method: 'PUT',
         data: JSON.stringify({ postid: postId, comment: commentText, username: username }),
         contentType: 'application/json',
@@ -148,7 +148,7 @@ function submitComment(postId, commentText, username) {
 
 function displayComments(postId) {
     $.ajax({
-        url: '../app/core/showcomments.php',
+        url: '../app/models/showcomments.php',
         method: 'GET',
         data: { postid: postId },
         success: function (response) {

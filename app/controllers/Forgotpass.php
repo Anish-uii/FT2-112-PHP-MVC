@@ -1,9 +1,13 @@
 <?php
-$model = new Model;
-$model->modelCall('user');
+namespace App\Controllers;
+
+use App\core\Database;
+use App\models\User;
+use App\core\Controller;
 class Forgotpass
 {
     use Database, User, Controller;
+
     public function index()
     {
         if (isset($_SESSION['registered']) && $_SESSION['registered'] == true) {
@@ -29,7 +33,7 @@ class Forgotpass
                     if (!$update_query) {
                         echo "<script>alert('Data not inserted.');</script>";
                     } else {
-                        $emailResponse = sendEmail($response['EMAIL'], $response['NAME'], $token);
+                        $emailResponse = $this->sendEmail($response['EMAIL'], $response['NAME'], $token);
                         echo "<script>alert(" . json_encode($emailResponse) . ");</script>";
                         echo "<script>window.location.href = '/'</script>";
                     }

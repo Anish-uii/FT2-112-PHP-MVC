@@ -1,5 +1,5 @@
 <?php
-$loadposts = new Welcome;
+$loadposts = new App\Controllers\Welcome;
 $posts = $loadposts->getPosts();
 $totalPosts = count($posts);
 $userInfo = $loadposts->getUser($_SESSION['username']);

@@ -1,10 +1,12 @@
 <?php
-$model = new Model;
-$model->modelCall('user');
+namespace App\Controllers;
 
+use App\core\Controller;
+use App\models\User; 
+use App\models\Post;       
 class Updateprofile
 {
-    use Controller, User;
+    use Controller, User, Post;
     public function index()
     {
         if (isset($_SESSION['registered']) && $_SESSION['registered'] == true) {
@@ -25,7 +27,7 @@ class Updateprofile
                 if (!$imageName || !$imageLoc) {
                     $res = $this->updateUser($fullName, NULL, $email, $username, $bio);
                 } else {
-                    $imagePath = uploadFile($imageName, $imageLoc);
+                    $imagePath = $this->uploadFile($imageName, $imageLoc);
                     if (!$imagePath) {
                         if (isset($_SESSION['error'])) {
                             echo "<script>alert(' " . $_SESSION['error'] . " Please try again.');</script>";
@@ -37,9 +39,12 @@ class Updateprofile
                         $res = $this->updateUser($fullName, $imagePath, $email, $username, $bio);
                     }
                 }
-                if ($res) {
+                if ((is_bool($res)) && ($res == true)) {
                     header("Location: /public/welcome");
                     exit;  
+                }
+                else {
+                    echo "<script>alert('$res');</script>";
                 }
             }
         } else {

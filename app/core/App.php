@@ -1,4 +1,5 @@
 <?php
+namespace App\core;
 class App
 {
 	private $controller = 'home';
@@ -39,11 +40,12 @@ class App
 		$fileName = "../app/controllers/" . ucfirst($URL[0]) . ".php";
 		if (file_exists($fileName)) {
 			require $fileName;
-			$this->controller = ucfirst($URL[0]);
+			$controller = ucfirst($URL[0]);
+			$this->controller = '\App\\controllers\\' . $controller ;
 		} else {
 			$fileName = "../app/controllers/Error404.php";
 			require $fileName;
-			$this->controller = 'Error404';
+			$this->controller = '\App\\controllers\\Error404';
 		}
 
 

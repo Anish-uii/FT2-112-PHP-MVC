@@ -1,10 +1,13 @@
 <?php
-$model = new Model;
-$model->modelCall('post');
+namespace App\Controllers;
+
+use App\core\Controller;
+use App\models\Post;
 
 class Createpost
 {
-    use Controller, Post, Database;
+    use Controller, Post; 
+
     public function index()
     {
         if (isset($_SESSION['registered']) && $_SESSION['registered'] == true) {
@@ -14,16 +17,15 @@ class Createpost
                 $imageName = trim($_FILES["uploadImage"]["name"]);
                 $imageLoc = trim($_FILES["uploadImage"]["tmp_name"]);
                 $postDesc = trim($_POST['post-desc']);
-                $imagePath = uploadFile($imageName, $imageLoc);
+                $imagePath = $this->uploadFile($imageName, $imageLoc);
                 if (!$imagePath) {
                     if (isset($_SESSION['error'])) {
                         echo "<script>alert(' " . $_SESSION['error'] . " Please try again.');</script>";
-                        unset($_SESSION['error']); 
+                        unset($_SESSION['error']);
                     }
                     header("Location: /public/createpost");
                     exit;
-                }
-                else {
+                } else {
                     $this->createNewPost($imagePath, $postDesc);
                 }
             }

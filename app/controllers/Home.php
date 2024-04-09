@@ -1,14 +1,14 @@
 <?php
-$model = new Model;
-$model->modelCall('user');
+namespace App\Controllers;
 
+use App\models\User;
+use App\core\Database;
+use App\core\Controller;
 class Home
 {
     use Database, User, Controller;
-
     public function index()
     {
-
         if (isset($_SESSION['registered']) && $_SESSION['registered'] == true) {
             echo "<script>window.location.href ='/public/welcome';</script>";
         } else {

@@ -1,7 +1,9 @@
 <?php
-$model = new Model;
-$model->modelCall('user');
+namespace App\Controllers;
 
+use App\models\User;
+use App\core\Database;
+use App\core\Controller;
 class Signup
 {
     use Database, User, Controller;
@@ -27,6 +29,7 @@ class Signup
                 if ($response === true) {
                     $_SESSION['registered'] = true;
                     $_SESSION['username'] = $username;
+                    $_SESSION['email'] = $email;
                     echo "<script>window.location.href = '/public/welcome';</script>";
                 } else {
                     echo "<script>alert(' " . addslashes($response) . " Please try again.');</script>";

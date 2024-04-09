@@ -5,7 +5,7 @@ class PostLoader
     public function loadMorePosts($offset)
     {
         $conn = mysqli_connect('localhost', 'anish-hell', '928485', 'USERS');
-        $query = "SELECT P.POST_ID, P.USERNAME, P.POST_DESCRIPTION, P.POST_DATE, P.IMAGE_PATH,  U.PROFILE_IMAGE AS PROFILE_IMAGE FROM POSTS P JOIN  USER_DATA U ON P.USERNAME = U.USERNAME ORDER BY P.POST_DATE DESC LIMIT $offset, 10;
+        $query = "SELECT P.POST_ID, P.USERNAME, P.POST_DESCRIPTION, P.POST_DATE, P.IMAGE_PATH, P.LIKES, U.PROFILE_IMAGE AS PROFILE_IMAGE FROM POSTS P JOIN  USER_DATA U ON P.USERNAME = U.USERNAME ORDER BY P.POST_DATE DESC LIMIT $offset, 10;
         ";
         $result = mysqli_query($conn, $query);
         $res = $result->fetch_all(MYSQLI_ASSOC);

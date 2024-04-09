@@ -1,5 +1,5 @@
 <?php
-$loadUserInfo = new Updateprofile;
+$loadUserInfo = new App\Controllers\Updateprofile;
 $userInfo = $loadUserInfo->getUser($_SESSION['username']);
 $userFullName = explode(" ",$userInfo['NAME']);
 $fname = $userFullName[0];

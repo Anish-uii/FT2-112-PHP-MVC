@@ -1,8 +1,16 @@
 <?php
+namespace App\core;
 
-define("ROOT", "http://www.social.com/public");
+class Config
+{
+    public function __construct()
+    {
+        define("ROOT", "http://www.social.com/public");
 
-define("DBHOST", "localhost");
-define("DBUSER", "anish-hell");
-define("DBPASS", "928485");
-define("DBNAME", "USERS");
+        define("DBHOST", "localhost");
+        define("DBUSER", "anish-hell");
+        define("DBPASS", "928485");
+        define("DBNAME", "USERS");
+    }
+}
+

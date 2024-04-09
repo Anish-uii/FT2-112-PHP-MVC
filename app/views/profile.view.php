@@ -1,5 +1,5 @@
 <?php
-$loadUserPosts = new Profile;
+$loadUserPosts = new App\Controllers\Profile;
 $posts = $loadUserPosts->userPosts($_SESSION['username']);
 $userInfo = $loadUserPosts->getUser($_SESSION['username']);
 

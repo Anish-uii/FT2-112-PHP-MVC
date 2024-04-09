@@ -1,9 +1,11 @@
 <?php
 
+namespace App\Models;
+use App\core\Database;
+
 trait Post
 {
     use Database;
-
     public function createNewPost($imagePath, $postDesc)
     {
         $postId = uniqid();
@@ -52,5 +54,23 @@ trait Post
     public function deletePost($postId)
     {
         $query = "";
+    }
+    public function uploadFile($imageName, $imageLoc)
+    {
+        $imageFileType = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
+
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            $_SESSION['error'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            return false;
+        } else {
+            $imagePath = "../public/assets/images/$imageName";
+            if (move_uploaded_file($imageLoc, $imagePath)) {
+                $_SESSION['success'] = "File uploaded successfully.";
+                return $imagePath;
+            } else {
+                $_SESSION['error'] = "Error uploading file.";
+                return false;
+            }
+        }
     }
 }

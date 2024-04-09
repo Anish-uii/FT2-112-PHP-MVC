@@ -1,5 +1,7 @@
 <?php
-Trait Controller
+
+namespace App\core;
+trait Controller
 {
     public function view($name)
     {
