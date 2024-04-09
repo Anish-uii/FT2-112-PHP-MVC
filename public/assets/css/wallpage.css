@@ -1,0 +1,208 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #E8F3D6;
+}
+main {
+    margin-bottom: 120px;
+}
+.container {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+}
+header {
+    background-color: #B5D5C5;
+    color: #333;
+    padding: 20px;
+    text-align: center;
+}
+header .navbar,
+header .navbar nav,
+header .navbar nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+header .navbar nav ul li{
+    list-style: none;
+    padding: 10px 20px;
+}
+header .navbar nav ul li a{
+    text-decoration: none;
+    color: #222;
+    font-size: 16px;
+    font-weight: 600;
+}
+header .navbar nav>a{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #F6FFDE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header .navbar nav a:hover {
+    color: #666;
+}
+header .navbar .username-heading{
+    font-size: 20px;
+}
+header .navbar nav a i {
+    font-size: 30px;
+}
+header .logo-image {
+    width: 50px;
+    height: auto;
+}
+header #logout-btn {
+    color: #E72929;
+}
+header .navbar a>img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+/* Main Wall Page Section Styling */
+main {
+    padding: 20px;
+}
+.wall {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.wall .post-image{
+    width: 100%;
+}
+.post { 
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.post-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.post-content {
+    margin-top: 10px;
+}
+.wall .post .reactions {
+    padding: 10px;
+}
+.wall .post .reactions a {
+    font-size: 30px;
+    margin: 4px 10px;
+}
+.wall .post .reactions .commentbox{
+    display: none;
+    padding: 10px;
+}
+.wall .load-more-section{
+    display: none;
+}
+.wall #load-more-btn{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    margin: 10px 20px;
+    background-color: #BBB;
+    color: #111;
+}
+.wall #load-more-btn:hover{
+    cursor: pointer;
+    background-color: #999;
+}
+
+.comment-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-form {
+    margin-bottom: 10px;
+}
+
+.new-comment {
+    display: flex;
+    align-items: center;
+}
+
+.new-comment input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    max-width: 260px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-comment-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+}
+
+.allcomments {
+    margin-top: 10px;
+}
+
+.comment {
+    margin-bottom: 5px;
+}
+
+.comment-username {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.comment-text {
+    word-break: break-all;
+}
+
+/* Footer Section */
+footer {
+    background-color: #B5D5C5;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 768px;
+}
+footer .create-post {
+    position: absolute;
+    left: 50%;
+    top: -40px;
+    transform: translate(-50%, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #ccc;
+    border: 8px solid #FFF;
+}
+footer .create-post a i{
+    font-size: 36px;
+}
+footer p {
+    margin-top: 60px;
+}
